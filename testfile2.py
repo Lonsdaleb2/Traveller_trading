@@ -166,7 +166,8 @@ while x <= 35:
         trade_list_all.append(temp_price)
         trade_list_all.append(temp_all_codes)
         j += 1
-print(trade_list_all) # this bit generates a list containing [trade type, trade price, trade codes related to the type, repeat...
+print(trade_list_all)
+print(len(trade_list_all))
 
 def start_check():
     new_list = []
@@ -174,24 +175,26 @@ def start_check():
     a = 0
     y = 2
     z = 0
-    #print(trade_list_all[2][0])
+    print(trade_list_all[2][0])
     while y <= len(trade_list_all):
-        if user_list[a] == trade_list_all[y][z]:
+        if a >= len(user_list):
+            print("A is not in XY and is greater than user length")
+            y += 3
+            z = 0
+            a = 0
+            if len(new_list) >= 1:
+                modifier_number_string = "+".join(new_list)
+                print(modifier_number_string)
+                price_temp = eval(modifier_number_string)
+                maths_list.append(price_temp)
+                new_list.clear()
+                print(maths_list)
+        elif user_list[a] == trade_list_all[y][z]:
             new_list.append(str(trade_list_all[y][z+1]))
             a += 1
             z = 0
             print("A is in Y,Z")
             print(new_list)
-            if a >= len(user_list):
-                print("A is in XY and is greater than user length")
-                y += 3
-                z = 0
-                a = 0
-                modifier_number_string = "+".join(new_list)
-                price_temp = eval(modifier_number_string)
-                maths_list.append(price_temp)
-                new_list.clear()
-                print(maths_list)
         elif user_list[a] != trade_list_all[y][z]:
             z += 2
             print("A is not in Y,Z")
@@ -199,19 +202,7 @@ def start_check():
                 a += 1
                 z = 0
                 print("Resetting Z")
-                if a >= len(user_list):
-                    print("A is not in XY and is greater than user length")
-                    y += 3
-                    z = 0
-                    a = 0
-                    modifier_number_string = "+".join(new_list)
-                    print(modifier_number_string)
-                    price_temp = eval(modifier_number_string)
-                    maths_list.append(price_temp)
-                    new_list.clear()
-                    print(maths_list)
+        #elif a >= len(user list)
 
-    print(maths_list) # what this should do is check each of the user_input trade codes at the top, and run them through every 
-                    # trade code with every trade good in the big generated list on line 169. Then add them together if applicable before
-                    # checking the next trade item in the big list.
+    print(maths_list)
 start_check()
