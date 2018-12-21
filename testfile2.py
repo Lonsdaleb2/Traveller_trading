@@ -189,6 +189,8 @@ def start_check():
                 maths_list.append(price_temp)
                 new_list.clear()
                 print(maths_list)
+            else:
+                maths_list.append(8)
         elif user_list[a] == trade_list_all[y][z]:
             new_list.append(str(trade_list_all[y][z+1]))
             a += 1
