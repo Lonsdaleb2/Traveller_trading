@@ -166,7 +166,7 @@ while x <= 35:
         trade_list_all.append(temp_price)
         trade_list_all.append(temp_all_codes)
         j += 1
-print(trade_list_all)
+print(trade_list_all) # this bit generates a list containing [trade type, trade price, trade codes related to the type, repeat...
 
 def start_check():
     new_list = []
@@ -174,7 +174,7 @@ def start_check():
     a = 0
     y = 2
     z = 0
-    print(trade_list_all[2][0])
+    #print(trade_list_all[2][0])
     while y <= len(trade_list_all):
         if user_list[a] == trade_list_all[y][z]:
             new_list.append(str(trade_list_all[y][z+1]))
