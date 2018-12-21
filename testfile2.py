@@ -211,5 +211,7 @@ def start_check():
                     new_list.clear()
                     print(maths_list)
 
-    print(maths_list)
+    print(maths_list) # what this should do is check each of the user_input trade codes at the top, and run them through every 
+                    # trade code with every trade good in the big generated list on line 169. Then add them together if applicable before
+                    # checking the next trade item in the big list.
 start_check()
