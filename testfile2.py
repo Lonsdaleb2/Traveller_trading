@@ -1,7 +1,7 @@
 
 
-user_list = ["Wa", "Ag", "Ga", "In", "Po"]  # user input example, need to be a string then converted to a list.
-broker_entry = str(1)
+user_list = ["XX", "Ht", "As"]  # user input example, need to be a string then converted to a list.
+broker_entry = "1"
 
 
 import math
@@ -83,43 +83,45 @@ illegal_weapons = trade_goods("Illegal Weapons", ["In", "Ht"], "1d6*5", 150000, 
 exotics = trade_goods("Exotics", "Special", "Special", 1, ["Special", 1], ["Special", 1], "Special.")
 #35 entries
 
-trade_goods_list = []
-trade_goods_list.append(common_electronics)
-trade_goods_list.append(common_industrial)
-trade_goods_list.append(common_manufactured)
-trade_goods_list.append(common_raw)
-trade_goods_list.append(common_consumables)
-trade_goods_list.append(common_ore)
-trade_goods_list.append(advanced_electronics)
-trade_goods_list.append(advanced_machine)
-trade_goods_list.append(advanced_manufactured)
-trade_goods_list.append(advanced_weapons)
-trade_goods_list.append(advanced_vehicles)
-trade_goods_list.append(biochemicals)
-trade_goods_list.append(crystals_gems)
-trade_goods_list.append(cybernetics)
-trade_goods_list.append(animals)
-trade_goods_list.append(luxury_consumables)
-trade_goods_list.append(luxury_goods)
-trade_goods_list.append(medical_supplies)
-trade_goods_list.append(petrochemicals)
-trade_goods_list.append(pharma)
-trade_goods_list.append(polymers)
-trade_goods_list.append(precious_metals)
-trade_goods_list.append(radioactives)
-trade_goods_list.append(robots)
-trade_goods_list.append(spices)
-trade_goods_list.append(textiles)
-trade_goods_list.append(uncommon_ore)
-trade_goods_list.append(uncommon_raw)
-trade_goods_list.append(wood)
-trade_goods_list.append(vehicles)
-trade_goods_list.append(illegal_bio)
-trade_goods_list.append(illegal_cyber)
-trade_goods_list.append(illegal_drugs)
-trade_goods_list.append(illegal_luxuries)
-trade_goods_list.append(illegal_weapons)
-trade_goods_list.append(exotics)
+master_trade_goods_list = []
+master_trade_goods_list.append(common_electronics)
+master_trade_goods_list.append(common_industrial)
+master_trade_goods_list.append(common_manufactured)
+master_trade_goods_list.append(common_raw)
+master_trade_goods_list.append(common_consumables)
+master_trade_goods_list.append(common_ore)
+master_trade_goods_list.append(advanced_electronics)
+master_trade_goods_list.append(advanced_machine)
+master_trade_goods_list.append(advanced_manufactured)
+master_trade_goods_list.append(advanced_weapons)
+master_trade_goods_list.append(advanced_vehicles)
+master_trade_goods_list.append(biochemicals)
+master_trade_goods_list.append(crystals_gems)
+master_trade_goods_list.append(cybernetics)
+master_trade_goods_list.append(animals)
+master_trade_goods_list.append(luxury_consumables)
+master_trade_goods_list.append(luxury_goods)
+master_trade_goods_list.append(medical_supplies)
+master_trade_goods_list.append(petrochemicals)
+master_trade_goods_list.append(pharma)
+master_trade_goods_list.append(polymers)
+master_trade_goods_list.append(precious_metals)
+master_trade_goods_list.append(radioactives)
+master_trade_goods_list.append(robots)
+master_trade_goods_list.append(spices)
+master_trade_goods_list.append(textiles)
+master_trade_goods_list.append(uncommon_ore)
+master_trade_goods_list.append(uncommon_raw)
+master_trade_goods_list.append(wood)
+master_trade_goods_list.append(vehicles)
+master_trade_goods_list.append(illegal_bio)
+master_trade_goods_list.append(illegal_cyber)
+master_trade_goods_list.append(illegal_drugs)
+master_trade_goods_list.append(illegal_luxuries)
+master_trade_goods_list.append(illegal_weapons)
+master_trade_goods_list.append(exotics)
+
+print(master_trade_goods_list)
 
 purchase_list = {
     0: 1.75,
@@ -148,23 +150,54 @@ purchase_list = {
     23: 0.25
 }
 
+a = 0
 x = 0
 j = 0
 trade_list_all = []
 while x <= 35:
     x += 1
-    if "All" in trade_goods_list[j].availability:
-        temp_all = trade_goods_list[j].type
-        temp_all_codes = trade_goods_list[j].purchase_dm_list
-        temp_price = trade_goods_list[j].base_price
-
+    if "All" in master_trade_goods_list[j].availability:
+        temp_all = master_trade_goods_list[j].type
+        temp_all_codes = master_trade_goods_list[j].purchase_dm_list
+        temp_price = master_trade_goods_list[j].base_price
 
         trade_list_all.append(temp_all)
         trade_list_all.append(temp_price)
         trade_list_all.append(temp_all_codes)
         j += 1
-    
-    
+print("All list complete")
+
+a = 0
+j = 0
+k = 0
+x = 0
+while j <= 35:
+    print(master_trade_goods_list[j].type)
+    if a >= len(user_list):
+        print("A limit has been reached, moving onto next J")
+        a = 0
+        j += 1
+    elif user_list[a] in master_trade_goods_list[j].availability:
+        print(user_list[a] + " is in ")
+        print(master_trade_goods_list[j].availability)
+        temp_any = master_trade_goods_list[j].type
+        temp_any_codes = master_trade_goods_list[j].purchase_dm_list
+        temp_any_price = master_trade_goods_list[j].base_price
+
+        trade_list_all.append(temp_any)
+        trade_list_all.append(temp_any_price)
+        trade_list_all.append(temp_any_codes)
+        a += 0
+        j += 1
+        print("Match has been found. Moving to next J")
+    elif user_list[a] not in master_trade_goods_list[j].availability:
+        print(user_list[a] + " is not in ")
+        print(master_trade_goods_list[j].availability)
+        a += 1
+
+    #elif user_list
+
+
 print(trade_list_all)
 
 
@@ -206,7 +239,7 @@ def start_check():
     print(maths_list)
 
 
- # need to take maths_list and add the players own modifiers, then running it through the modifier dict (dice roll and broker skill)
+
     a = 0
     while a < len(maths_list):
         dice_roll = eval(str(random.randint(1, 6))+"+"+str(random.randint(1, 6))+"+"+str(random.randint(1, 6)))
@@ -215,17 +248,22 @@ def start_check():
         temp_number = str(maths_list[a])
         maths_list[a] = (eval((temp_number)+"+"+str(dice_plus_mod)))
         a += 1
-        print(maths_list)
+        print(maths_list) # this takes the maths_list and adds the players own modifiers, then runns it through the modifier dict (dice roll and broker skill)
 
     a = 0
     x = 1
     while x <= len(maths_list):
         x += 1
         replacement = maths_list[a]
-        b = purchase_list.get(replacement)
+        if replacement >= 23:
+            b = 0.25
+        elif replacement <= 0:
+            b = 0.25
+        else:
+            b = purchase_list.get(replacement)
         maths_list[a] = b
         a += 1
-    print(maths_list) # this gives us the %-based modifiers to tweak the goods cost. 0.5/1.15 etc
+    print(maths_list) # this gives us the %-based modifiers to tweak the goods base cost. 0.5/1.15 etc
 
     a = 0
     c = 1
