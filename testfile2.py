@@ -1,7 +1,7 @@
-user_list = ["Wa", "Ag", "Ga", "In", "Po"]  # user input example
 
-#trade_list_all = ["spoon", 20050, ["Ag", 1, "Zz", 6, "Po", 3], "potato", 10000, ["In", 10, "Ga", 4], "potato", 5000,
-                      #["Wa", 2, "Ag", 27]]  # example of output in trav_trading.py
+
+user_list = ["Wa", "Ag", "Ga", "In", "Po"]  # user input example, need to be a string then converted to a list.
+broker_entry = str(1)
 
 
 import math
@@ -9,15 +9,12 @@ import random
 from trade_class import trade_goods
 
 
-
-
-
 common_electronics = trade_goods("Common Electronics", ["All"], "2d6*10", 20000, ["In", 2, "Ht", 3, "Ri", 1],
                                  ["Na", 2, "Lt", 1, "Po", 1], "Simple electronics, basic computers.")
 common_industrial = trade_goods("Common Industrial", ["All"], "2d6*10", 10000, ["Na", 2, "In", 5], ["Ni", 3, "Ag", 2],
                                 "Machine components and common spare parts.")
-common_manufactured = trade_goods("Common Manufactured Goods", ["All"], "2d*10", 20000, ["Na", 2, "In", 5], ["Ni", 3,
-                                    "Ag", 2], "Household appliances, clothing, etc.")
+common_manufactured = trade_goods("Common Manufactured Goods", ["All"], "2d*10", 20000, ["Na", 2, "In", 5],
+                                  ["Ni", 3,  "Ag", 2], "Household appliances, clothing, etc.")
 common_raw = trade_goods("Common Raw Materials", ["All"], "2d6*20", 5000, ["Na", 3, "Ga", 2], ["In", 2, "Po", 2],
                          "Metals, chemicals, plastics, other basic materials.")
 common_consumables = trade_goods("Common Consumables", ["All"], "2d6*20", 500, ["Ag", 3, "Wa", 2, "Ga", 1, "As", -4],
@@ -166,8 +163,10 @@ while x <= 35:
         trade_list_all.append(temp_price)
         trade_list_all.append(temp_all_codes)
         j += 1
+    
+    
 print(trade_list_all)
-print(len(trade_list_all))
+
 
 def start_check():
     new_list = []
@@ -204,7 +203,43 @@ def start_check():
                 a += 1
                 z = 0
                 print("Resetting Z")
-        #elif a >= len(user list)
-
     print(maths_list)
+
+
+ # need to take maths_list and add the players own modifiers, then running it through the modifier dict (dice roll and broker skill)
+    a = 0
+    while a < len(maths_list):
+        dice_roll = eval(str(random.randint(1, 6))+"+"+str(random.randint(1, 6))+"+"+str(random.randint(1, 6)))
+        dice_plus_mod = str(dice_roll)+"+"+str(broker_entry)
+        dice_plus_mod = eval(dice_plus_mod)
+        temp_number = str(maths_list[a])
+        maths_list[a] = (eval((temp_number)+"+"+str(dice_plus_mod)))
+        a += 1
+        print(maths_list)
+
+    a = 0
+    x = 1
+    while x <= len(maths_list):
+        x += 1
+        replacement = maths_list[a]
+        b = purchase_list.get(replacement)
+        maths_list[a] = b
+        a += 1
+    print(maths_list) # this gives us the %-based modifiers to tweak the goods cost. 0.5/1.15 etc
+
+    a = 0
+    c = 1
+    while a < len(maths_list):
+        replacement = float((maths_list[a]))
+        trade_list_all[c] = (replacement*float(trade_list_all[c]))
+        a += 1
+        c += 3
+    print(trade_list_all) # this puts the modified prices into the original list.
+
+    b = 2
+    while b <= len(trade_list_all):
+        trade_list_all.remove(trade_list_all[b])
+        b += 2
+    print(trade_list_all) # this removes the trade codes, giving us just item and its cost.
+
 start_check()
